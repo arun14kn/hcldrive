@@ -39,7 +39,7 @@ jobs:
 
     # Step 5: Terraform Plan
     - name: Terraform Plan
-      run: terraform plan -out=tfplan
+      run: terraform plan
 
     # Step 6: Apply Terraform changes (only on `main` branch and after approval)
     - name: Terraform Apply
