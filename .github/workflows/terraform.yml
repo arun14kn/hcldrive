@@ -13,37 +13,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Step 1: Checkout the repository
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Step 1: Set up Terraform
+    # Step 2: Set up Terraform
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:
-        terraform_version: '1.4.0'  # Replace with the required version
+        terraform_version: '1.4.0'  # Use the version of Terraform you need
 
-    # Step 2: Install TFLint for linting
+    # Step 3: Install TFLint (Terraform Linter)
     - name: Install TFLint
       run: |
         curl -LO https://github.com/terraform-linters/tflint/releases/download/v0.34.0/tflint_linux_amd64.zip
         unzip tflint_linux_amd64.zip
         sudo mv tflint /usr/local/bin
 
-    # Step 3: Run Terraform linting (TFLint)
+    # Step 4: Run TFLint to lint your Terraform code
     - name: Run TFLint
       run: tflint
 
-    # Step 4: Initialize Terraform (gets providers, modules)
+    # Step 5: Initialize Terraform (downloads providers, modules, etc.)
     - name: Terraform Init
       run: terraform init
 
-    # Step 5: Terraform Plan
+    # Step 6: Terraform Plan (create a plan file to preview changes)
     - name: Terraform Plan
-      run: terraform plan
+      run: terraform plan -out=tfplan
 
-    # Step 6: Apply Terraform changes (only on `main` branch and after approval)
+    # Step 7: Terraform Apply (apply changes, only on `main` branch or after approval)
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
-      if: github.ref == 'refs/heads/main'  # Only apply on the main branch
+      if: github.ref == 'refs/heads/main'  # Only apply changes to the `main` branch
 
-    # Optionally: Send notification or further actions after Terraform apply
+    # Optionally, notify after deployment or perform additional steps
+    - name: Send Deployment Notification
+      run: echo "Terraform Apply is complete!"
