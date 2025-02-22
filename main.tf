@@ -45,7 +45,7 @@ resource "aws_internet_gateway" "my_igw" {
 resource "aws_security_group" "ecs_security_group" {
   name        = "ecs_security_group"
   description = "Allow inbound traffic for ECS tasks"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = aws_vpc.my_vpc.id
 
   ingress {
     from_port   = 80
