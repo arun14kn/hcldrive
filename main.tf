@@ -1,3 +1,18 @@
+terraform {
+    required_providers {
+      aws = {
+        source = "hashicorp/aws"
+        version = "~> 4.0.0"
+      }
+    }
+}
+
+provider "aws" {
+    region = "us-east-1"
+    access_key = "AKIAX3NVJFI7DD5DN6NO"
+    secret_key = "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"
+}
+
 # VPC creation (if you don't already have one)
 resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/16"
