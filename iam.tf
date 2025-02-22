@@ -1,5 +1,11 @@
-"Statement": [ {
-  "Sid": "eksadministrator",
-  "Effect": "Allow",
-  "Action": "eks:*",
-  "Resource": "*"...
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "eksadministrator",
+            "Effect": "Allow",
+            "Action": "eks:*",
+            "Resource": "*"
+        }
+    ]
+}
